@@ -1,0 +1,14 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active, .side-nav-button:hover, .side-nav-button:active {
+    color: lightgrey;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
