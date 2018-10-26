@@ -1,3 +1,15 @@
-<p>
-  new-training works!
-</p>
+<section class="new-training" fxLayout fxLayoutAlign="center">
+  <mat-card fxFlex.gt-xs="400px" fxFlex>
+      <mat-card-title fxLayoutAlign="center">Time to start a workout!</mat-card-title>
+      <mat-card-content fxLayoutAlign="center">
+          <mat-form-field >
+            <mat-select placeholder="type of training" [(ngModel)]="idecko"> 
+              <mat-option  *ngFor="let exercise of avaliableExercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
+            </mat-select>     
+          </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center">
+        <button type="submit" (click)="onStartTraining()" [disabled]="!idecko" mat-button>Start</button>
+      </mat-card-actions>
+  </mat-card>
+</section>
