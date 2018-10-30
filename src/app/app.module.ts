@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
+import { AngularFireModule } from "@angular/fire"
+import { AngularFirestoreModule } from "@angular/fire/firestore"
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { StopTrainingComponent } from './training/current-training/stop-training
     AppRoutingModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],
