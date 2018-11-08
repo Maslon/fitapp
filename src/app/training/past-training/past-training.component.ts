@@ -34,9 +34,8 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
-  onDelete(element){
-    console.log(element)
-    // this.trainingService.deletePastExercise(id)
+  onDelete(id){
+    this.trainingService.deletePastExercise(id)
   }
 
   ngOnDestroy(){

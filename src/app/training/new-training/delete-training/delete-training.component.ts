@@ -27,7 +27,6 @@ export class DeleteTrainingComponent implements OnInit, OnDestroy {
 
   onDelete(id){
     this.trainingService.deleteAvailableExercise(id)
-    console.log(id)
   }
 
   ngOnDestroy(){

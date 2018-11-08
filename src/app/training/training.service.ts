@@ -35,7 +35,9 @@ export class TrainingService {
   fetchAvailableExercises() {
     this.afAuth.authState.subscribe(user => this.userId = user.uid)
     this.uiService.loadingStateChanged.next(true)
-    this.fbSubs.push(this.db.collection("availableExercises").snapshotChanges()
+    this.fbSubs.push(this.db.collection("availableExercises")
+    // .valueChanges()
+    .snapshotChanges()
     .pipe(map((docData) => {
       return docData.map(doc => {
         return {
@@ -43,7 +45,8 @@ export class TrainingService {
           ...doc.payload.doc.data() 
         }
       })
-    })).subscribe((exercises: Exercise[]) => {
+    }))
+    .subscribe((exercises: Exercise[]) => {
       this.availableExercises = exercises.filter(exercise => exercise.ownedBy === this.userId)
       this.exercisesChanged.next([...this.availableExercises])
       this.uiService.loadingStateChanged.next(false)
@@ -59,7 +62,7 @@ export class TrainingService {
       ex => ex.id === selectedId
     );
     this.exerciseChanged.next({ ...this.runningExercise });
-    console.log(this.userId)
+    console.log(this.runningExercise)
   }
 
   completeExercise() {
