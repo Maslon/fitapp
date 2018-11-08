@@ -1,23 +1,25 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { TrainingService } from './../training/training.service';
-import { User } from "./user.model";
 import { AuthData } from "./auth-data.model";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth"
-import { MatSnackBar } from '@angular/material';
 import { UIService } from '../shared/ui.service';
+
 
 @Injectable({providedIn:"root"})
 
 export class AuthService {
     private isAuth = false;
-    authChange = new Subject<boolean>()
+    authChange = new Subject<boolean>();
+    sendUser = new Subject<string>()
 
     constructor(private router: Router, 
                 private afAuth: AngularFireAuth,
                 private trainingService: TrainingService,
-                private uiService: UIService){}
+                private uiService: UIService,
+                private db: AngularFirestore){}
 
 
     initAuthListener(){
@@ -26,6 +28,7 @@ export class AuthService {
                 this.isAuth = true
                 this.authChange.next(true),
                 this.router.navigate(["/training"])
+                console.log("prasata")
             } else {
                 this.authChange.next(false)
                 this.router.navigate(["/"])
@@ -40,6 +43,8 @@ export class AuthService {
         this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
         .then(result =>  {
             this.uiService.loadingStateChanged.next(false)
+            console.log(result)
+            
         })
         .catch(error => {
             this.uiService.loadingStateChanged.next(false)

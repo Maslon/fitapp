@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./past-training.component.css']
 })
 export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ["date", "name", "duration", "calories", "state"]
+  displayedColumns: string[] = ["date", "name", "duration", "calories", "state", "delete"]
   dataSource = new MatTableDataSource<Exercise>()
   subscription: Subscription
   @ViewChild(MatSort) sort: MatSort
@@ -32,6 +32,11 @@ export class PastTrainingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   doFilter(filterValue: string){
     this.dataSource.filter = filterValue.trim().toLowerCase()
+  }
+
+  onDelete(element){
+    console.log(element)
+    // this.trainingService.deletePastExercise(id)
   }
 
   ngOnDestroy(){
