@@ -39,6 +39,7 @@ export class TrainingService {
     // .valueChanges()
     .snapshotChanges()
     .pipe(map((docData) => {
+      console.log(docData)
       return docData.map(doc => {
         return {
           id: doc.payload.doc.id,
@@ -102,7 +103,18 @@ export class TrainingService {
   }
 
   fetchCompletedOrCancelledExercises() {
-    this.fbSubs.push(this.db.collection("finishedExercises").valueChanges().subscribe((exercises: Exercise[]) => { 
+    this.fbSubs.push(this.db.collection("finishedExercises")
+    .snapshotChanges()
+    .pipe(map((docData) => {
+      console.log(docData)
+      return docData.map(doc => {
+        return {
+          ...doc.payload.doc.data(),
+          id: doc.payload.doc.id          
+        }
+      })
+    }))
+    .subscribe((exercises: Exercise[]) => { 
       this.finishedExercisesChanged.next(exercises.filter(exercise => exercise.ownedBy === this.userId))
     }))
   }

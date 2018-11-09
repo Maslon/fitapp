@@ -25,8 +25,9 @@ export class DeleteTrainingComponent implements OnInit, OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
-  onDelete(id){
-    this.trainingService.deleteAvailableExercise(id)
+  onDelete(element){
+    this.trainingService.deleteAvailableExercise(element.id)
+    console.log(element)
   }
 
   ngOnDestroy(){
