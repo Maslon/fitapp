@@ -28,7 +28,6 @@ export class AuthService {
                 this.isAuth = true
                 this.authChange.next(true),
                 this.router.navigate(["/training"])
-                console.log("prasata")
             } else {
                 this.authChange.next(false)
                 this.router.navigate(["/"])
@@ -70,7 +69,7 @@ export class AuthService {
 
 
     isAuthenticated(){
-        return this.isAuthenticated != null
+        return this.isAuth
     }
 
 }

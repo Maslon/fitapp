@@ -1,5 +1,4 @@
 export interface Exercise {
-    docId?: string;
     id: string;
     name: string;
     duration: number;
